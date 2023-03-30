@@ -1,6 +1,5 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
+#include <string>
 
 namespace task3_singly_linked_list {
     using namespace std;
@@ -29,6 +28,15 @@ namespace task3_singly_linked_list {
                 head = tmp;
             }
             cout << "\n Destructor " << endl;
+        }
+
+        void clear() {
+            Node* tmp;
+            while (head) {
+                tmp = head->next;
+                delete head;
+                head = tmp;
+            }
         }
 
         void insert(T value) {
@@ -74,19 +82,34 @@ namespace task3_singly_linked_list {
             return result;
         }
 
+        int count() {
+            int count = 0;
+            Node* tmp = head;
+            while (tmp != nullptr) {
+                count++;
+                tmp = tmp->next;
+            }
+            return count;
+        }
+
         double average() {
             if (head == nullptr) {
-                return 0.0;
+                return 0;
+            } 
+            else {
+                return sum() / count();
             }
-            int count = 0;
-            double sum = 0;
-            Node* cnt = head;
-            while (cnt != nullptr) {
-                count++;
-                sum += cnt->Inf;
-                cnt = cnt->next;
+        }
+
+        bool search(int value) {
+            Node* tmp = head;
+            while (tmp != nullptr)
+            {
+                if (tmp->Inf == value)
+                    return true;
+                tmp = tmp->next;
             }
-            return sum / count;
+            return false;
         }
 
         void print() {
@@ -100,7 +123,7 @@ namespace task3_singly_linked_list {
     };
   
     int main() {
-        cout << "\n\n Task 3" << endl;
+        cout << "\n Task 3" << endl;
         LinkedList<double> list;
         list.insert(5.5);
         list.insert(1);
@@ -108,18 +131,83 @@ namespace task3_singly_linked_list {
         list.insert(-5);
         cout << "\n Singly linked list:\n  ";
         list.print(); 
+
         list.remove(0);
         cout << "\n Remove first (0) from list:\n  ";
         list.print();
+
         cout << "\n Sum of the list = " << list.sum() << endl;
-        cout << "\n Average = " << list.average() << endl;
+        cout << " Average = " << list.average() << endl;
         cout << endl;
+
+        cout << " Create your own list: " << endl;
+        LinkedList<double> userList;
+        string input;
+        double value;
         
+        if (userList.count() == 0) {
+            cout << " Enter a number or exit typing 'e': ";
+            cin.ignore();
+            getline(cin, input);
+
+            while (input != "e") {
+                try {
+                    value = stod(input);
+                    userList.insert(value);
+                }
+                catch (const invalid_argument& e) {
+                    cout << "Invalid input, try again." << endl;
+                }
+                cout << " Enter a number or exit typing 'e': ";
+                getline(cin, input);
+            }
+
+            cout << "\n Created list: " << endl;
+            userList.print();
+            cout << "\n Options:" << endl;
+            cout << " 1. Remove an element" << endl;
+            cout << " 2. Search for an element" << endl;
+            cout << " 3. Exit" << endl;
+           
+            char option;
+            double item;
+            do {
+                cout << " Your choice: ";
+                cin >> option;
+
+                if (option == '1') {
+                    cout << " Enter the item you want to remove: ";
+                    cin >> item;
+                    userList.remove(item);
+                    cout << " After removing: " << endl;
+                    userList.print();
+                }
+                else if (option == '2') {
+                    cout << "Enter the item you want to search for: ";
+                    cin >> item;
+                    if (userList.search(item) == true) {
+                        cout << " true " << endl;
+                    }
+                    else {
+                        cout << " false" << endl;
+                    }
+                }
+                else if (option == '3') {
+                    cout << "\n Sum of the list = " << userList.sum() << endl;
+                    cout << " Average = " << userList.average() << endl;
+                    break;
+                }
+                else {
+                    cout << "\n Invalid option";
+                }
+            } while (option != '3');
+        }
         return 0;
     }
 }
 
-void task3()
+void task3() 
 {
     task3_singly_linked_list::main();
 }
+
