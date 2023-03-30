@@ -24,7 +24,7 @@ namespace task2_arrays {
         }
     }
 
-    template<>
+    /*template<>
     void unionArrays<char*>(vector<char*>& arr1, vector<char*>& arr2) {
         if (arr1.empty() && arr2.empty()) {
             return;
@@ -35,7 +35,7 @@ namespace task2_arrays {
         for (const auto& elem : merged) {
             cout << elem << " ";
         }
-    }
+    }*/
 
     int main() {
         cout << "\n\n Task 2" << endl;
@@ -78,12 +78,12 @@ namespace task2_arrays {
             cout << elem << " ";
         }
         cout << "\n Union of two arrays: " << endl;
-        unionArrays(arr1, arr2);
+        /*unionArrays(arr1, arr2);
 
         vector<const char*> a = { "hello", "world", "foo", "bar" };
         vector<const char*> b = { "world", "baz", "qux" };
 
-        unionArrays(a, b);
+        unionArrays(a, b);*/
         return 0;
     }
 }
