@@ -30,15 +30,6 @@ namespace task3_singly_linked_list {
             cout << "\n Destructor " << endl;
         }
 
-        void clear() {
-            Node* tmp;
-            while (head) {
-                tmp = head->next;
-                delete head;
-                head = tmp;
-            }
-        }
-
         void insert(T value) {
             Node* add = new Node(value);
             if (head == nullptr) {
